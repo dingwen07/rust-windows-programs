@@ -7,15 +7,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'sample'",
+            "name": "Debug executable 'processes'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=sample",
-                    "--package=sample"
+                    "--bin=processes",
+                    "--package=processes"
                 ],
                 "filter": {
-                    "name": "sample",
+                    "name": "processes",
                     "kind": "bin"
                 }
             },
@@ -25,16 +25,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'sample'",
+            "name": "Debug unit tests in executable 'processes'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=sample",
-                    "--package=sample"
+                    "--bin=processes",
+                    "--package=processes"
                 ],
                 "filter": {
-                    "name": "sample",
+                    "name": "processes",
                     "kind": "bin"
                 }
             },
