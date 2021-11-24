@@ -1,9 +1,9 @@
-#![windows_subsystem = "windows"]
+#![windows_subsystem = "console"]
 
 use windows::{
     Win32::Foundation::*, Win32::System::Threading::*,
     Win32::System::ProcessStatus::*,
-    Win32::UI::Shell::ShellExecuteA,
+    Win32::UI::Shell::ShellExecuteW,
 };
 
 fn main() {
@@ -40,10 +40,12 @@ fn main() {
     if !flag {
         println!("Process not found");
         unsafe {
-            let handle = ShellExecuteA(HWND::default(), PSTR::default(), PSTR(path.as_mut_ptr()), PSTR::default(), PSTR::default(), 0);
+            let mut v: Vec<u16> = path.encode_utf16().collect();
+            v.push(0);
+            let handle = ShellExecuteW(HWND::default(), PWSTR::default(), PWSTR(v.as_mut_ptr()), PWSTR::default(), PWSTR::default(), 0);
             let err = GetLastError();
             if err.0 != 0 {
-                println!("ShellExecuteA failed: {:?}", err);
+                println!("ShellExecuteW failed: {:?}", err);
             } else {
                 println!("Process started, handle: {:?}", handle);
             }
